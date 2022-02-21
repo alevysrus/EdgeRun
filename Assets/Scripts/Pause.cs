@@ -22,7 +22,6 @@ public class Pause : MonoBehaviour
     public Slider FOVslider;
     public Slider Sensslider;
     public GameObject OnEnterSettings, OnExitSettings;
-    private float TimeScale = 1f;
     void Start()
     {
         if (Activators.isFullScreen)
@@ -50,20 +49,20 @@ public class Pause : MonoBehaviour
         {
             if (!IsActive)
             {
+                Time.timeScale = 0f;
                 PauseMenu.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(OnExitSettings);
                 IsActive = true;
-                Time.timeScale = 0f;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
             else
             {
                 PauseMenu.SetActive(false);
-                Time.timeScale = TimeScale;
                 IsActive = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                Time.timeScale = Activators.timeLine;
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape) && IsSettingActive)
@@ -90,7 +89,7 @@ public class Pause : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = TimeScale;
+        Time.timeScale = Activators.timeLine;
     }
     public void SetSensitivity(float sensitivity)
     {
@@ -118,15 +117,14 @@ public class Pause : MonoBehaviour
     public void Resume()
     {
         PauseMenu.SetActive(false);
-        Time.timeScale = TimeScale;
         IsActive = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Time.timeScale = Activators.timeLine;
     }
     public void Mainmenu()
     {
         SceneManager.LoadScene("main menu");
-        Time.timeScale = TimeScale;
     }
     public void Settings()
     {

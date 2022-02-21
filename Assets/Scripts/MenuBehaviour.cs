@@ -23,6 +23,7 @@ public class MenuBehaviour : MonoBehaviour
     public Text Version;
     private void Start()
     {
+        Time.timeScale = Activators.timeLine;
         Activators.volume = PlayerPrefs.GetFloat("volume");
         Activators.forscreen = PlayerPrefs.GetInt("FullScreen");
         Activators.level = PlayerPrefs.GetInt("level");

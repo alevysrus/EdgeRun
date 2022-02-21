@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
     float speed = 12.8f;
-    float gamevelocity;
+    float gamevelocity = 12.8f;
     float gravity = -60f;
     float jumpHeihgt = 2.9f;
     public LayerMask groundMask;
@@ -24,16 +24,41 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
     bool isLaddered;
 
+    int indexOfDelay = 0;
+    bool laddercheckcondition;
+
     private void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.4f, groundMask | ladderMask);
-        isLaddered = Physics.CheckSphere(ladderCheck.position, 1f, ladderMask);
+        laddercheckcondition = Physics.CheckSphere(ladderCheck.position, 1f, ladderMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.4f, groundMask);
+
+        if (isLaddered && !laddercheckcondition)
+        {
+            indexOfDelay++;
+        }
+
+        switch (indexOfDelay, laddercheckcondition)
+        {
+            case (0 , true):
+                isLaddered = true;
+                break;
+            case (1 | 2 | 3 | 4 | 5  , false | true):
+                isLaddered = true;
+                isGrounded = true;
+                break;
+            case(6 , false):
+                isLaddered = false;
+                indexOfDelay = 0;
+                break;
+            default:
+                break;
+        }
 
         if ((isGrounded | isLaddered) && velocity.y < 0)
         {
             velocity.y = -2f;
         }
-        if (Input.GetButtonDown("Jump") && (isGrounded | isLaddered))
+        if (Input.GetButton("Jump") && (isGrounded | isLaddered))
         {
             velocity.y = Mathf.Sqrt(jumpHeihgt * -2f * gravity);
         }
@@ -85,45 +110,29 @@ public class PlayerMovement : MonoBehaviour
         switch ((isLaddered, isGrounded))
         {
             case (true, true):
-                if (Input.GetAxis("Horizontal") != 0 & Input.GetAxis("Vertical") != 0)
-                {
-                    gamevelocity = speed / Mathf.Sqrt(2);
-                }
-                else
-                {
-                    gamevelocity = speed;
-                }
-                controller.Move(gamevelocity * Time.unscaledDeltaTime * moving);
+                controller.Move(gamevelocity * Time.deltaTime * moving);
                 break;
             case (true, false):
-                gamevelocity = speed / 2;
-                controller.Move(gamevelocity * Time.unscaledDeltaTime * laddermoving);
+                controller.Move(gamevelocity * Time.deltaTime * laddermoving);
                 break;
             case (false, true):
-                if (Input.GetAxis("Horizontal") != 0 & Input.GetAxis("Vertical") != 0)
-                {
-                    gamevelocity = speed / Mathf.Sqrt(2);
-                }
-                else
-                {
-                    gamevelocity = speed;
-                }
-                controller.Move(gamevelocity * Time.unscaledDeltaTime * moving);
+                controller.Move(gamevelocity * Time.deltaTime * moving);
                 break;
             case (false, false):
-                if (Input.GetAxis("Horizontal") != 0 & Input.GetAxis("Vertical") != 0)
-                {
-                    gamevelocity = speed / Mathf.Sqrt(2);
-                }
-                else
-                {
-                    gamevelocity = speed;
-                }
-                controller.Move(gamevelocity * Time.unscaledDeltaTime * moving);
+                controller.Move(gamevelocity * Time.deltaTime * moving);
                 break;
-
         }
-        velocity.y += gravity * Time.unscaledDeltaTime;
-        controller.Move(velocity * Time.unscaledDeltaTime);
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+
+        if (Input.GetAxis("Horizontal") != 0 & Input.GetAxis("Vertical") != 0)
+        {
+            gamevelocity = speed / Mathf.Sqrt(2);
+        }
+        else
+        {
+            gamevelocity = speed;
+        }
     }
 }

@@ -9,9 +9,15 @@ public class Activators
     public static int forscreen;
     public static float defaultFOV = 80;
     public static float mouseSensitivity = 100;
+    public static int isEasy;
+
+    public static float timeLine = 1f;
+
     public static bool isBlueDefault = true;
     public static bool isGreenDefault = true;
     public static bool isMagentaDefault = true;
     public static bool isOrangeDefault = true;
-    public static int isEasy;
+
+    public static bool isEtherealActive = false;
+    
 }
