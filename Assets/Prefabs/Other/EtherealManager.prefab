@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1959489549879588977}
   - component: {fileID: 1959489549879588982}
   m_Layer: 0
-  m_Name: SphereManager
+  m_Name: EtherealManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

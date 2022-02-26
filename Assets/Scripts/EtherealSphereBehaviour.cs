@@ -2,68 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class EtherealSphereBehaviour : MonoBehaviour
 {
     public GameObject[] sphere;
-    public LayerMask playerMask;
     public CharacterController player;
 
-    bool[] isShpereActive;
-    bool[] isNearPlayer;
+    float[] distansce;
 
     private void Start()
     {
-        isShpereActive = new bool[sphere.Length];
-        isNearPlayer = new bool[sphere.Length];
-        for (int i = 0; i < isShpereActive.Length; i++)
+        Activators.isShpereActive = new bool[sphere.Length];
+        distansce = new float[sphere.Length];
+        for (int i = 0; i < Activators.isShpereActive.Length; i++)
         {
-            isShpereActive[i] = true;
+            Activators.isShpereActive[i] = true;
         }
     }
 
     private void Update()
     {
-        byte countOfActive = 0;
-        
-        for (int i = 0; i < sphere.Length; i++)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            isNearPlayer[i] = Physics.CheckSphere(sphere[i].transform.position, 3f, playerMask);
-            if (Input.GetKeyDown(KeyCode.E))
+            if (!Activators.isPlayerHasEtherealSphere)
             {
-                if (isShpereActive[i])
+                for (int i = 0; i < sphere.Length; i++)
                 {
-                    if (isNearPlayer[i])
-                    {
-                        isShpereActive[i] = false;
-                        sphere[i].SetActive(false);
-                        break;
-                    }
+                    var longitude = (player.transform.position - sphere[i].transform.position).magnitude;
+                    distansce[i] = Mathf.Abs(longitude);
                 }
-                else
+
+                int indexOfMiValue = Array.IndexOf(distansce, distansce.Min());
+
+                if (Activators.isShpereActive[indexOfMiValue] && distansce.Min() < 3f)
                 {
-                    isShpereActive[i] = true;
-                    sphere[i].transform.position = player.transform.position;
-                    sphere[i].SetActive(true);
-                    break;
+                    Activators.isShpereActive[indexOfMiValue] = false;
+                    sphere[indexOfMiValue].SetActive(false);
+                    Activators.isPlayerHasEtherealSphere = true;
                 }
-            }
-        }
-        for (int i = 0; i < sphere.Length; i++)
-        {
-            if (!isShpereActive[i])
-            {
-                countOfActive++;
-            }
-            if (countOfActive > 0)
-            {
-                Activators.isEtherealActive = true;
-                break;
             }
             else
             {
-                Activators.isEtherealActive = false;
-            }
+                int indexOfCurrentSphere = Array.IndexOf(Activators.isShpereActive, false);
+                Activators.isShpereActive[indexOfCurrentSphere] = true;
+                sphere[indexOfCurrentSphere].transform.position = player.transform.position;
+                sphere[indexOfCurrentSphere].SetActive(true);
+                Activators.isPlayerHasEtherealSphere = false;
+            } 
         }
     }
 }
