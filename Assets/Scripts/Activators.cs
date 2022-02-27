@@ -18,7 +18,4 @@ public class Activators
     public static bool isMagentaDefault = true;
     public static bool isOrangeDefault = true;
 
-    public static bool isPlayerHasEtherealSphere = false;
-    public static bool[] isShpereActive;
-
 }
