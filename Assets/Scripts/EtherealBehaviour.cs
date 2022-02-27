@@ -8,7 +8,6 @@ public class EtherealBehaviour : MonoBehaviour
 {
     public GameObject[] sphere;
     public CharacterController player;
-    bool isPlayerHasEtherealSphere;
     bool[] isShpereActive;
 
     public GameObject[] etherealWall;
@@ -20,23 +19,32 @@ public class EtherealBehaviour : MonoBehaviour
     public float activedistance;
     float distanceToPlayerFromWall;
     float distanceToSphereFromWall;
+    int[] indexOfSwithed;
 
     private void Start()
     {
-        isPlayerHasEtherealSphere = false;
+        Activators.isPlayerHasEtherealSphere = false;
         isShpereActive = new bool[sphere.Length];
         for (int i = 0; i < isShpereActive.Length; i++)
         {
             isShpereActive[i] = true;
         }
         distansceBetweenPlayerAndSphere = new float[sphere.Length];
+        indexOfSwithed = new int[etherealWall.Length];
+        for (int i = 0; i < indexOfSwithed.Length; i++)
+        {
+            indexOfSwithed[i] = 0;
+        }
+        Activators.executionIndex = 0;
+        Activators.deathIndex = false;
     }
 
     private void Update()
     {
+        Activators.executionIndex++;
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (!isPlayerHasEtherealSphere)
+            if (!Activators.isPlayerHasEtherealSphere)
             {
                 for (int i = 0; i < sphere.Length; i++)
                 {
@@ -50,7 +58,7 @@ public class EtherealBehaviour : MonoBehaviour
                 {
                     isShpereActive[indexOfMiValue] = false;
                     sphere[indexOfMiValue].SetActive(false);
-                    isPlayerHasEtherealSphere = true;
+                    Activators.isPlayerHasEtherealSphere = true;
                 }
             }
             else
@@ -59,51 +67,53 @@ public class EtherealBehaviour : MonoBehaviour
                 isShpereActive[indexOfCurrentSphere] = true;
                 sphere[indexOfCurrentSphere].transform.position = player.transform.position;
                 sphere[indexOfCurrentSphere].SetActive(true);
-                isPlayerHasEtherealSphere = false;
+                Activators.isPlayerHasEtherealSphere = false;
             }
         }
-        for (int j = 0; j < etherealWall.Length; j++)
+
+        if (Activators.deathIndex)
         {
-            for (int i = 0; i < sphere.Length; i++)
+            Activators.deathIndex = false;
+            if (Activators.isPlayerHasEtherealSphere)
+            {
+                Activators.isPlayerHasEtherealSphere = false;
+                int _indexOfCurrentSphere = Array.IndexOf(isShpereActive, false);
+                isShpereActive[_indexOfCurrentSphere] = true;
+                sphere[_indexOfCurrentSphere].SetActive(true);
+            }
+            
+        }
+
+        for (int i = 0; i < sphere.Length; i++)
+        {
+            
+            for (int j = 0; j < etherealWall.Length; j++)
             {
                 distanceToSphereFromWall = (sphere[i].transform.position - etherealWall[j].transform.position).magnitude;
-                distanceToPlayerFromWall = (player.transform.position - etherealWall[j].transform.position).magnitude;
-                switch (isPlayerHasEtherealSphere, distanceToPlayerFromWall < activedistance, isShpereActive[i], distanceToSphereFromWall < activedistance)
+
+                if (isShpereActive[i] && distanceToSphereFromWall < activedistance)
                 {
-                    case (true, true, false, false):
-                        etherealWall[j].GetComponent<BoxCollider>().enabled = false;
-                        etherealWall[j].GetComponent<MeshRenderer>().material = _transparent;
-                        break;
-                    case (true, true, true, false):
-                        etherealWall[j].GetComponent<BoxCollider>().enabled = false;
-                        etherealWall[j].GetComponent<MeshRenderer>().material = _transparent;
-                        break;
-                    case (true, true, false, true):
-                        etherealWall[j].GetComponent<BoxCollider>().enabled = false;
-                        etherealWall[j].GetComponent<MeshRenderer>().material = _transparent;
-                        break;
-                    case (true, false, true, true):
-                        etherealWall[j].GetComponent<BoxCollider>().enabled = false;
-                        etherealWall[j].GetComponent<MeshRenderer>().material = _transparent;
-                        break;
-                    case (false, true, true, true):
-                        etherealWall[j].GetComponent<BoxCollider>().enabled = false;
-                        etherealWall[j].GetComponent<MeshRenderer>().material = _transparent;
-                        break;
-                    case (false, false, true, true):
-                        etherealWall[j].GetComponent<BoxCollider>().enabled = false;
-                        etherealWall[j].GetComponent<MeshRenderer>().material = _transparent;
-                        break;
-                    case (true, true, true, true):
-                        etherealWall[j].GetComponent<BoxCollider>().enabled = false;
-                        etherealWall[j].GetComponent<MeshRenderer>().material = _transparent;
-                        break;
-                    default:
-                        etherealWall[j].GetComponent<BoxCollider>().enabled = true;
-                        etherealWall[j].GetComponent<MeshRenderer>().material = _default;
-                        break;
+                    indexOfSwithed[j] = Activators.executionIndex;
+                    etherealWall[j].GetComponent<BoxCollider>().enabled = false;
+                    etherealWall[j].GetComponent<MeshRenderer>().material = _transparent;
+                }
+                else if (!(indexOfSwithed[j] == Activators.executionIndex))
+                {
+                    etherealWall[j].GetComponent<BoxCollider>().enabled = true;
+                    etherealWall[j].GetComponent<MeshRenderer>().material = _default;
+                }
+                distanceToPlayerFromWall = (player.transform.position - etherealWall[j].transform.position).magnitude;
+                if (Activators.isPlayerHasEtherealSphere && distanceToPlayerFromWall < activedistance)
+                {
+                    etherealWall[j].GetComponent<BoxCollider>().enabled = false;
+                    etherealWall[j].GetComponent<MeshRenderer>().material = _transparent;
+                }
+                else if (!(indexOfSwithed[j] == Activators.executionIndex))
+                {
+                    etherealWall[j].GetComponent<BoxCollider>().enabled = true;
+                    etherealWall[j].GetComponent<MeshRenderer>().material = _default;
                 }
             }
         }
-    }       
+    }
 }

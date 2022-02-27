@@ -10,6 +10,7 @@ public class RespawnBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         player.transform.SetPositionAndRotation(respawn.transform.position, respawn.transform.rotation);
+        Activators.deathIndex = true;
     }
     private void Update()
     {
