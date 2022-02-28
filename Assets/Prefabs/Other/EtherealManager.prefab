@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1959489549879588977}
+  - component: {fileID: 1608363170}
   m_Layer: 0
   m_Name: EtherealManager
   m_TagString: Untagged
@@ -30,3 +31,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1608363170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959489549879588983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c23542d60e6774d47827dc3a711583ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphere: []
+  player: {fileID: 0}
+  etherealWall: []
+  disabledWall: []
+  _default: {fileID: 2100000, guid: 588d3b01747d0a240b979a83d9d5dddd, type: 2}
+  _transparent: {fileID: 2100000, guid: fbf44b211e142fd4fb2d89736687beb0, type: 2}
+  activedistance: 7

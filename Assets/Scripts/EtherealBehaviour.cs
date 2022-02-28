@@ -11,6 +11,7 @@ public class EtherealBehaviour : MonoBehaviour
     bool[] isShpereActive;
 
     public GameObject[] etherealWall;
+    public GameObject[] disabledWall;
     public Material _default;
     public Material _transparent;
 
@@ -37,6 +38,11 @@ public class EtherealBehaviour : MonoBehaviour
         }
         Activators.executionIndex = 0;
         Activators.deathIndex = false;
+        for (int i = 0; i < disabledWall.Length; i++)
+        {
+            disabledWall[i].GetComponent<BoxCollider>().enabled = true;
+            disabledWall[i].GetComponent<MeshRenderer>().material = _default;
+        }
     }
 
     private void Update()
@@ -112,6 +118,34 @@ public class EtherealBehaviour : MonoBehaviour
                 {
                     etherealWall[j].GetComponent<BoxCollider>().enabled = true;
                     etherealWall[j].GetComponent<MeshRenderer>().material = _default;
+                }
+            }
+
+            for (int j = 0; j < disabledWall.Length; j++)
+            {
+                distanceToSphereFromWall = (sphere[i].transform.position - disabledWall[j].transform.position).magnitude;
+
+                if (isShpereActive[i] && distanceToSphereFromWall < activedistance)
+                {
+                    indexOfSwithed[j] = Activators.executionIndex;
+                    disabledWall[j].GetComponent<BoxCollider>().enabled = true;
+                    disabledWall[j].GetComponent<MeshRenderer>().material = _default;
+                }
+                else if (!(indexOfSwithed[j] == Activators.executionIndex))
+                {
+                    disabledWall[j].GetComponent<BoxCollider>().enabled = false;
+                    disabledWall[j].GetComponent<MeshRenderer>().material = _transparent;
+                }
+                distanceToPlayerFromWall = (player.transform.position - disabledWall[j].transform.position).magnitude;
+                if (Activators.isPlayerHasEtherealSphere && distanceToPlayerFromWall < activedistance)
+                {
+                    disabledWall[j].GetComponent<BoxCollider>().enabled = true;
+                    disabledWall[j].GetComponent<MeshRenderer>().material = _default;
+                }
+                else if (!(indexOfSwithed[j] == Activators.executionIndex))
+                {
+                    disabledWall[j].GetComponent<BoxCollider>().enabled = false;
+                    disabledWall[j].GetComponent<MeshRenderer>().material = _transparent;
                 }
             }
         }
