@@ -48,7 +48,7 @@ public class EtherealBehaviour : MonoBehaviour
     private void Update()
     {
         Activators.executionIndex++;
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && Activators.isGrounded)
         {
             if (!Activators.isPlayerHasEtherealSphere)
             {
@@ -60,7 +60,7 @@ public class EtherealBehaviour : MonoBehaviour
 
                 int indexOfMiValue = Array.IndexOf(distansceBetweenPlayerAndSphere, distansceBetweenPlayerAndSphere.Min());
 
-                if (isShpereActive[indexOfMiValue] && distansceBetweenPlayerAndSphere.Min() < 3f)
+                if (isShpereActive[indexOfMiValue] && distansceBetweenPlayerAndSphere.Min() < 2f)
                 {
                     isShpereActive[indexOfMiValue] = false;
                     sphere[indexOfMiValue].SetActive(false);

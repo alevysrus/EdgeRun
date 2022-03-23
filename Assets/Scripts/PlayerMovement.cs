@@ -21,16 +21,17 @@ public class PlayerMovement : MonoBehaviour
     float zChanched = 0;
 
     Vector3 velocity;
-    bool isGrounded;
     bool isLaddered;
 
     int indexOfDelay = 0;
     bool laddercheckcondition;
 
+    //float y;
+
     private void Update()
     {
-        laddercheckcondition = Physics.CheckSphere(ladderCheck.position, 1f, ladderMask);
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.4f, groundMask);
+       laddercheckcondition = Physics.CheckSphere(ladderCheck.position, 1f, ladderMask);
+        Activators.isGrounded = Physics.CheckSphere(groundCheck.position, 0.4f, groundMask);
 
         if (isLaddered && !laddercheckcondition)
         {
@@ -44,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case (1 | 2 | 3 | 4 | 5  , false | true):
                 isLaddered = true;
-                isGrounded = true;
+                Activators.isGrounded = true;
                 break;
             case(6 , false):
                 isLaddered = false;
@@ -54,11 +55,11 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
 
-        if ((isGrounded | isLaddered) && velocity.y < 0)
+        if ((Activators.isGrounded | isLaddered) && velocity.y < 0)
         {
             velocity.y = -2f;
         }
-        if (Input.GetButton("Jump") && (isGrounded | isLaddered))
+        if (Input.GetButton("Jump") && (Activators.isGrounded | isLaddered))
         {
             velocity.y = Mathf.Sqrt(jumpHeihgt * -2f * gravity);
         }
@@ -107,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 laddermoving = (transform.right * x + transform.up * z);
         Vector3 moving = (transform.right * x + transform.forward * z);
 
-        switch ((isLaddered, isGrounded))
+        switch ((isLaddered, Activators.isGrounded))
         {
             case (true, true):
                 controller.Move(gamevelocity * Time.deltaTime * moving);
@@ -134,5 +135,58 @@ public class PlayerMovement : MonoBehaviour
         {
             gamevelocity = speed;
         }
+
     }
+    /*
+     x = Input.GetAxis("Horizontal");
+        z = Input.GetAxis("Vertical");
+
+        switch (Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl))
+        {
+            case (true, false):
+                y = 1;
+                break;
+            case (false, true):
+                y = -1;
+                break;
+            default:
+                y = 0;
+                break;
+        }
+        if (x == xChanched & Mathf.Abs(x) != 1 & x != 0)
+        {
+            x = 0;
+        }
+        else
+        {
+            if (Mathf.Abs(x) == 1)
+            {
+                x = Input.GetAxisRaw("Horizontal");
+            }
+            else
+            {
+                x = Input.GetAxis("Horizontal");
+                xChanched = x;
+            }
+
+        }
+        if (z == zChanched & Mathf.Abs(z) != 1 & z != 0)
+        {
+            z = 0;
+        }
+        else
+        {
+            if (Mathf.Abs(z) == 1)
+            {
+                z = Input.GetAxisRaw("Vertical");
+            }
+            else
+            {
+                z = Input.GetAxis("Vertical");
+                zChanched = z;
+            }
+        }
+        Vector3 moving = (transform.right * x + transform.forward * z + transform.up * y);
+        controller.Move(gamevelocity * Time.deltaTime * moving);
+    */
 }

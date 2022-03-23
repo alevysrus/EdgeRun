@@ -22,4 +22,6 @@ public class Activators
     public static bool deathIndex;
     public static bool isPlayerHasEtherealSphere;
 
+    public static bool isGrounded;
+
 }
