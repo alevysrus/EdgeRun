@@ -23,33 +23,34 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     bool isLaddered;
 
-    int indexOfDelay = 0;
+    int indexOfDelayForLadder = 0;
     bool laddercheckcondition;
 
     //float y;
 
+
     private void Update()
     {
-       laddercheckcondition = Physics.CheckSphere(ladderCheck.position, 1f, ladderMask);
+        laddercheckcondition = Physics.CheckSphere(ladderCheck.position, 1f, ladderMask);
         Activators.isGrounded = Physics.CheckSphere(groundCheck.position, 0.4f, groundMask);
 
         if (isLaddered && !laddercheckcondition)
         {
-            indexOfDelay++;
+            indexOfDelayForLadder++;
         }
 
-        switch (indexOfDelay, laddercheckcondition)
+        switch (indexOfDelayForLadder, laddercheckcondition)
         {
             case (0 , true):
                 isLaddered = true;
                 break;
-            case (1 | 2 | 3 | 4 | 5  , false | true):
+            case (1 | 2 | 3  , false | true):
                 isLaddered = true;
                 Activators.isGrounded = true;
                 break;
-            case(6 , false):
+            case(4 , false):
                 isLaddered = false;
-                indexOfDelay = 0;
+                indexOfDelayForLadder = 0;
                 break;
             default:
                 break;

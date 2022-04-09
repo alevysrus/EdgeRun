@@ -4,12 +4,13 @@ using System.Collections.Generic;
 public class Activators
 {
     public static int level = 1;
-    public static float volume = 1;
+    public static float volume = 1f;
     public static bool isFullScreen = true;
     public static int forscreen;
-    public static float defaultFOV = 80;
-    public static float mouseSensitivity = 100;
+    public static float defaultFOV = 80f;
+    public static float mouseSensitivity = 100f;
     public static int isEasy;
+    public static string isFirstEnter;
 
     public static float timeLine = 1f;
 

@@ -23,28 +23,37 @@ public class MenuBehaviour : MonoBehaviour
     public Text Version;
     private void Start()
     {
+        Activators.isFirstEnter = PlayerPrefs.GetString("check");
         Time.timeScale = Activators.timeLine;
-        Activators.volume = PlayerPrefs.GetFloat("volume");
-        Activators.forscreen = PlayerPrefs.GetInt("FullScreen");
-        Activators.level = PlayerPrefs.GetInt("level");
-        Activators.defaultFOV = PlayerPrefs.GetFloat("FOV");
-        Activators.mouseSensitivity = PlayerPrefs.GetFloat("sensitivity");
-        Activators.isEasy = PlayerPrefs.GetInt("HardMode");
-        if (Activators.forscreen == 0)
+        if (Activators.isFirstEnter != null)
         {
-            Activators.isFullScreen = true;
+            Activators.volume = PlayerPrefs.GetFloat("volume");
+            Activators.forscreen = PlayerPrefs.GetInt("FullScreen");
+            Activators.level = PlayerPrefs.GetInt("level");
+            Activators.defaultFOV = PlayerPrefs.GetFloat("FOV");
+            Activators.mouseSensitivity = PlayerPrefs.GetFloat("sensitivity");
+            Activators.isEasy = PlayerPrefs.GetInt("HardMode");
+            if (Activators.forscreen == 0)
+            {
+                Activators.isFullScreen = true;
+            }
+            else
+            {
+                Activators.isFullScreen = false;
+            }
+            if (Activators.isFullScreen)
+            {
+                ScreenSettings.isOn = true;
+            }
+            else
+            {
+                ScreenSettings.isOn = false;
+            }
         }
         else
         {
-            Activators.isFullScreen = false;
-        }
-        if (Activators.isFullScreen)
-        {
-            ScreenSettings.isOn = true;
-        }
-        else
-        {
-            ScreenSettings.isOn = false;
+            Activators.isFirstEnter = "no";
+            PlayerPrefs.SetString("check", Activators.isFirstEnter);
         }
         Screen.fullScreen = Activators.isFullScreen;
         MainMenu.SetActive(true);
@@ -61,6 +70,8 @@ public class MenuBehaviour : MonoBehaviour
         Volume.value = Activators.volume;
         Sensslider.value = Activators.mouseSensitivity;
         Version.text = Application.version;
+
+        
     }
     private void Update()
     {
