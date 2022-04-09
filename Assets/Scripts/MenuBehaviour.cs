@@ -23,9 +23,8 @@ public class MenuBehaviour : MonoBehaviour
     public Text Version;
     private void Start()
     {
-        Activators.isFirstEnter = PlayerPrefs.GetString("check");
         Time.timeScale = Activators.timeLine;
-        if (Activators.isFirstEnter != null)
+        if (PlayerPrefs.HasKey("volume"))
         {
             Activators.volume = PlayerPrefs.GetFloat("volume");
             Activators.forscreen = PlayerPrefs.GetInt("FullScreen");
@@ -49,11 +48,6 @@ public class MenuBehaviour : MonoBehaviour
             {
                 ScreenSettings.isOn = false;
             }
-        }
-        else
-        {
-            Activators.isFirstEnter = "no";
-            PlayerPrefs.SetString("check", Activators.isFirstEnter);
         }
         Screen.fullScreen = Activators.isFullScreen;
         MainMenu.SetActive(true);

@@ -10,7 +10,6 @@ public class Activators
     public static float defaultFOV = 80f;
     public static float mouseSensitivity = 100f;
     public static int isEasy;
-    public static string isFirstEnter;
 
     public static float timeLine = 1f;
 
