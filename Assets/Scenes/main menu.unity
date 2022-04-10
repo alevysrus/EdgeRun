@@ -1398,6 +1398,7 @@ MonoBehaviour:
   OnEnterNewGame: {fileID: 2022967966}
   OnExit: {fileID: 156002344}
   Version: {fileID: 1999797904}
+  moving: {fileID: 1439229929}
 --- !u!1 &499221967
 GameObject:
   m_ObjectHideFlags: 0

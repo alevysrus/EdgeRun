@@ -21,8 +21,13 @@ public class MenuBehaviour : MonoBehaviour
     public Slider Sensslider;
     public GameObject OnEnterSettings,OnEnterNewGame, OnExit;
     public Text Version;
+
+    public CameraAnimation moving;
+    private bool isSubMenuActive;
     private void Start()
     {
+        
+        isSubMenuActive = false;
         Time.timeScale = Activators.timeLine;
         if (PlayerPrefs.HasKey("volume"))
         {
@@ -74,6 +79,13 @@ public class MenuBehaviour : MonoBehaviour
         {
             ContinueButton.interactable = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && isSubMenuActive)
+        {
+
+            BackToMenu();
+            moving.MoveBack();
+        }
     }
     public void SetSensitivity(float sensitivity)
     {
@@ -104,6 +116,7 @@ public class MenuBehaviour : MonoBehaviour
     }
     public void NewGame()
     {
+        isSubMenuActive = true;
         MainMenu.SetActive(false);
         StartCoroutine(DelayForNewGame());
     }
@@ -119,6 +132,7 @@ public class MenuBehaviour : MonoBehaviour
     }
     public void InputOptions()
     {
+        isSubMenuActive = true;
         MainMenu.SetActive(false);
         StartCoroutine(DelayForOptions());
     }
@@ -130,6 +144,7 @@ public class MenuBehaviour : MonoBehaviour
     }
     public void BackToMenu()
     {
+        isSubMenuActive = false;
         Options.SetActive(false);
         NewGameMenu.SetActive(false);
         StartCoroutine(DelayForMenu());
