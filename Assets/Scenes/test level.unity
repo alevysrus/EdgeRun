@@ -313,6 +313,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7391019475871789504, guid: 749cc75613c956847974e5e5c5abdc31, type: 3}
   m_PrefabInstance: {fileID: 1869654898}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &269701290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 269701291}
+  m_Layer: 0
+  m_Name: 5 mechanics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &269701291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269701290}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.452019, y: -13.138771, z: 0.5692749}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &343477939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1701,7 +1731,7 @@ PrefabInstance:
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: sphere.Array.data[0]
       value: 
-      objectReference: {fileID: 1835704104}
+      objectReference: {fileID: 561250939}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: sphere.Array.data[1]
       value: 
@@ -1709,7 +1739,7 @@ PrefabInstance:
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: sphere.Array.data[2]
       value: 
-      objectReference: {fileID: 561250939}
+      objectReference: {fileID: 1835704104}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.size
       value: 1
