@@ -22,10 +22,13 @@ public class MenuBehaviour : MonoBehaviour
     public GameObject OnEnterSettings,OnEnterNewGame, OnExit;
     public Text Version;
 
+    public Button Disabled;
+
     public CameraAnimation moving;
     private bool isSubMenuActive;
     private void Start()
     {
+        Disabled.interactable = false;
         
         isSubMenuActive = false;
         Time.timeScale = Activators.timeLine;
@@ -69,8 +72,6 @@ public class MenuBehaviour : MonoBehaviour
         Volume.value = Activators.volume;
         Sensslider.value = Activators.mouseSensitivity;
         Version.text = Application.version;
-
-        
     }
     private void Update()
     {

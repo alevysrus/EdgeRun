@@ -683,15 +683,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886530407955947005, guid: 5a102e39b1f62c144abf8cff6295939b, type: 3}
       propertyPath: changed.Array.data[0].x
-      value: 55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3886530407955947005, guid: 5a102e39b1f62c144abf8cff6295939b, type: 3}
       propertyPath: changed.Array.data[0].y
-      value: 15
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3886530407955947005, guid: 5a102e39b1f62c144abf8cff6295939b, type: 3}
       propertyPath: changed.Array.data[0].z
-      value: 103
+      value: 133.5
       objectReference: {fileID: 0}
     - target: {fileID: 3886530407955947005, guid: 5a102e39b1f62c144abf8cff6295939b, type: 3}
       propertyPath: changed.Array.data[1].x
@@ -707,15 +707,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886530407955947005, guid: 5a102e39b1f62c144abf8cff6295939b, type: 3}
       propertyPath: _default.Array.data[0].x
-      value: 55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3886530407955947005, guid: 5a102e39b1f62c144abf8cff6295939b, type: 3}
       propertyPath: _default.Array.data[0].y
-      value: 13
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3886530407955947005, guid: 5a102e39b1f62c144abf8cff6295939b, type: 3}
       propertyPath: _default.Array.data[0].z
-      value: 103
+      value: 133.5
       objectReference: {fileID: 0}
     - target: {fileID: 3886530407955947005, guid: 5a102e39b1f62c144abf8cff6295939b, type: 3}
       propertyPath: _default.Array.data[1].x
@@ -73505,11 +73505,11 @@ PrefabInstance:
       objectReference: {fileID: 1352317036}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.size
-      value: 190
+      value: 189
       objectReference: {fileID: 0}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: etherealWall.Array.size
-      value: 212
+      value: 213
       objectReference: {fileID: 0}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[0]
@@ -74610,63 +74610,63 @@ PrefabInstance:
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[174]
       value: 
-      objectReference: {fileID: 1204399884}
+      objectReference: {fileID: 970992411}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[175]
       value: 
-      objectReference: {fileID: 970992411}
+      objectReference: {fileID: 1075451860}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[176]
       value: 
-      objectReference: {fileID: 1075451860}
+      objectReference: {fileID: 930231562}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[177]
       value: 
-      objectReference: {fileID: 930231562}
+      objectReference: {fileID: 1553324606}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[178]
       value: 
-      objectReference: {fileID: 1553324606}
+      objectReference: {fileID: 1242542088}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[179]
       value: 
-      objectReference: {fileID: 1242542088}
+      objectReference: {fileID: 1429047069}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[180]
       value: 
-      objectReference: {fileID: 1429047069}
+      objectReference: {fileID: 2077073912}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[181]
       value: 
-      objectReference: {fileID: 2077073912}
+      objectReference: {fileID: 46334219}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[182]
       value: 
-      objectReference: {fileID: 46334219}
+      objectReference: {fileID: 1173029593}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[183]
       value: 
-      objectReference: {fileID: 1173029593}
+      objectReference: {fileID: 557789995}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[184]
       value: 
-      objectReference: {fileID: 557789995}
+      objectReference: {fileID: 1856568694}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[185]
       value: 
-      objectReference: {fileID: 1856568694}
+      objectReference: {fileID: 1597362321}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[186]
       value: 
-      objectReference: {fileID: 1597362321}
+      objectReference: {fileID: 1094559617}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[187]
       value: 
-      objectReference: {fileID: 1094559617}
+      objectReference: {fileID: 287750351}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[188]
       value: 
-      objectReference: {fileID: 287750351}
+      objectReference: {fileID: 160099712}
     - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: disabledWall.Array.data[189]
       value: 
@@ -75119,6 +75119,10 @@ PrefabInstance:
       propertyPath: etherealWall.Array.data[211]
       value: 
       objectReference: {fileID: 724179315}
+    - target: {fileID: 1608363170, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
+      propertyPath: etherealWall.Array.data[212]
+      value: 
+      objectReference: {fileID: 1204399884}
     - target: {fileID: 1959489549879588977, guid: 0bc138afea9bd2d4498a1b870f77003d, type: 3}
       propertyPath: m_RootOrder
       value: 0

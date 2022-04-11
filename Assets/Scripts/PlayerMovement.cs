@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isGod)
         {
-            laddercheckcondition = Physics.CheckSphere(ladderCheck.position, 1f, ladderMask);
+            laddercheckcondition = Physics.CheckSphere(ladderCheck.position, 0.5f, ladderMask);
             Activators.isGrounded = Physics.CheckSphere(groundCheck.position, 0.4f, groundMask);
 
             if (isLaddered && !laddercheckcondition)
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 velocity.y = -2f;
             }
-            if (Input.GetButton("Jump") && (Activators.isGrounded | isLaddered))
+            if (Input.GetButton("Jump") && Activators.isGrounded)
             {
                 velocity.y = Mathf.Sqrt(jumpHeihgt * -2f * gravity);
             }
