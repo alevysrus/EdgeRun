@@ -22,8 +22,14 @@ public class Pause : MonoBehaviour
     public Slider FOVslider;
     public Slider Sensslider;
     public GameObject OnEnterSettings, OnExitSettings;
+
+    //public GameObject GameUI;
+    //public GameObject EtherealUI;
+    //public GameObject GravityUI;
     void Start()
     {
+        //GameUI.SetActive(false);
+
         if (Activators.isFullScreen)
         {
             ScreenSettings.isOn = true;
