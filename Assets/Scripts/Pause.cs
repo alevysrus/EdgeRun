@@ -91,11 +91,17 @@ public class Pause : MonoBehaviour
             PauseMenu.SetActive(true);
             EventSystem.current.SetSelectedGameObject(OnExitSettings);
         }
+        if (Input.GetKeyDown(KeyCode.Q) && Activators.level > 4)
+        {
+            Activators.gravityIndex++;
+            Activators.gravityIndex = Activators.gravityIndex % 6;
+        }
     }
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = Activators.timeLine;
+        Activators.gravityIndex = 0;
     }
     public void SetSensitivity(float sensitivity)
     {

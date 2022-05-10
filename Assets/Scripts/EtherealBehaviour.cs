@@ -7,7 +7,7 @@ using System.Linq;
 public class EtherealBehaviour : MonoBehaviour
 {
     public GameObject[] sphere;
-    public CharacterController player;
+    public GameObject player;
     bool[] isShpereActive;
 
     public GameObject[] etherealWall;
@@ -43,7 +43,7 @@ public class EtherealBehaviour : MonoBehaviour
             indexOfDisabledSwitched[i] = 0;
         }
         Activators.executionIndex = 0;
-        Activators.deathIndex = false;
+        Activators.etherealDeathIndex = false;
         for (int i = 0; i < disabledWall.Length; i++)
         {
             disabledWall[i].GetComponent<BoxCollider>().enabled = false;
@@ -83,9 +83,9 @@ public class EtherealBehaviour : MonoBehaviour
             }
         }
 
-        if (Activators.deathIndex)
+        if (Activators.etherealDeathIndex)
         {
-            Activators.deathIndex = false;
+            Activators.etherealDeathIndex = false;
             if (Activators.isPlayerHasEtherealSphere)
             {
                 Activators.isPlayerHasEtherealSphere = false;

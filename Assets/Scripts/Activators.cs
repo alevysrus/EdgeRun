@@ -10,7 +10,6 @@ public class Activators
     public static float defaultFOV = 80f;
     public static float mouseSensitivity = 100f;
     public static int isEasy;
-
     public static float timeLine = 1f;
 
     public static bool isBlueDefault = true;
@@ -19,9 +18,13 @@ public class Activators
     public static bool isOrangeDefault = true;
 
     public static int executionIndex;
-    public static bool deathIndex;
+    public static bool etherealDeathIndex;
     public static bool isPlayerHasEtherealSphere;
 
     public static bool isGrounded;
+    public static int gravityIndex = 0;
+    public static bool playerDeathIndex;
+
+    public static bool cameraDeathIndex;
 
 }

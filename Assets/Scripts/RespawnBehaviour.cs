@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class RespawnBehaviour : MonoBehaviour
 {
-    public CharacterController player;
+    public CustomController player;
     public GameObject respawn;
 
     private void OnTriggerEnter(Collider other)
     {
         player.transform.SetPositionAndRotation(respawn.transform.position, respawn.transform.rotation);
-        Activators.deathIndex = true;
+        player.GetComponentInChildren<Camera>().transform.rotation = Quaternion.Euler(0f , 0f, 0f);
+        Activators.etherealDeathIndex = true;
+        Activators.cameraDeathIndex = true;
+        Activators.playerDeathIndex = true;
     }
     private void Update()
     {

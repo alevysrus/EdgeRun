@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3995777948203300521}
   - component: {fileID: 3995777948203300522}
   - component: {fileID: 3886530407955947005}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Green Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3995777948203300520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 1.5, y: 10, z: 1.5}
+  m_LocalScale: {x: 1.5, y: 6, z: 1.5}
   m_Children:
   - {fileID: 3995777948562216699}
   m_Father: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 3995777948562216699}
   - component: {fileID: 3995777948562216701}
   - component: {fileID: 3995777948562216700}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Green Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}

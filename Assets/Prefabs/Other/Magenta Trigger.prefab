@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5252480626911021310}
   - component: {fileID: 5252480626911021311}
   - component: {fileID: -8183974459408473457}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Magenta Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5252480626911021309}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 1.5, y: 10, z: 1.5}
+  m_LocalScale: {x: 1.5, y: 6, z: 1.5}
   m_Children:
   - {fileID: 5252480628225986850}
   m_Father: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 5252480628225986850}
   - component: {fileID: 5252480628225986844}
   - component: {fileID: 5252480628225986851}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Magenta Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}

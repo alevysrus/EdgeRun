@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController controller;
-    float speed = 12.8f;
-    float gamevelocity = 12.8f;
-    float gravity = -60f;
-    float jumpHeihgt = 2.9f;
+    public CustomController controller;
+    float speed = 15f;
+    float gamevelocity = 15f;
+    float gravity = -3100f;
+    float jumpHeihgt = 135f;
     public LayerMask groundMask;
     public LayerMask ladderMask;
     public Transform groundCheck;
@@ -21,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     float zChanched = 0;
 
     Vector3 velocity;
+    Vector3 gravityDirection;
     bool isLaddered;
 
     int indexOfDelayForLadder = 0;
@@ -29,12 +29,15 @@ public class PlayerMovement : MonoBehaviour
     private float y;
     private bool isGod;
 
+    Vector3 laddermoving;
+    Vector3 moving;
+
     private void Start()
     {
         isGod = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!isGod)
         {
@@ -56,12 +59,19 @@ public class PlayerMovement : MonoBehaviour
                 isGod = false;
             }
         }
+        if (Activators.playerDeathIndex)
+        {
+            velocity.x = 0;
+            velocity.y = 0;
+            velocity.z = 0;
+            Activators.playerDeathIndex = false;
+        }
     }
 
-    public void PlayerMoving()
+    public void PlayerMovingInput()
     {
         laddercheckcondition = Physics.CheckSphere(ladderCheck.position, 0.5f, ladderMask);
-        Activators.isGrounded = Physics.CheckSphere(groundCheck.position, 0.4f, groundMask);
+        Activators.isGrounded = Physics.CheckSphere(groundCheck.position, 0.3f, groundMask);
 
         if (isLaddered && !laddercheckcondition)
         {
@@ -85,17 +95,16 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
 
-        if ((Activators.isGrounded | isLaddered) && velocity.y < 0)
+        PlayerGravityDirection();
+
+        if (Activators.isGrounded | isLaddered)
         {
-            velocity.y = -2f;
+            velocity = gravityDirection * -2f;
         }
+
         if (Input.GetButton("Jump") && Activators.isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeihgt * -2f * gravity);
-        }
-        else
-        {
-            velocity.z = 0f;
+            velocity = gravityDirection * Mathf.Sqrt(jumpHeihgt * -2f * gravity);
         }
 
         x = Input.GetAxis("Horizontal");
@@ -135,27 +144,84 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        Vector3 laddermoving = (transform.right * x + transform.up * z);
-        Vector3 moving = (transform.right * x + transform.forward * z);
-
+    }
+    public void PlayerGravityDirection()
+    {
+        switch (Activators.gravityIndex)
+        {
+            case 0:
+                gravityDirection = transform.up;
+                break;
+            case 1:
+                gravityDirection = -transform.right;
+                break;
+            case 2:
+                gravityDirection = transform.forward;
+                break;
+            case 3:
+                gravityDirection = transform.right;
+                break;
+            case 4:
+                gravityDirection = -transform.forward;
+                break;
+            case 5:
+                gravityDirection = -transform.up;
+                break;
+        }
+    }
+    public void PlayerMovingDirection()
+    {
+        switch (Activators.gravityIndex)
+        {
+            case 0:
+                laddermoving = (transform.right * x + transform.up * z);
+                moving = (transform.right * x + transform.forward * z);
+                break;
+            case 1:
+                laddermoving = (transform.up * x + transform.right * -z);
+                moving = (transform.up * x + transform.forward * z);
+                break;
+            case 2:
+                laddermoving = (transform.right * -x + transform.forward * z);
+                moving = (transform.right * -x + transform.up * -z);
+                break;
+            case 3:
+                laddermoving = (transform.up * -x + transform.right * z);
+                moving = (transform.up * -x + transform.forward * -z);
+                break;
+            case 4:
+                laddermoving = (transform.right * x + transform.forward * -z);
+                moving = (transform.right * x + transform.up * z);
+                break;
+            case 5:
+                laddermoving = (transform.right * -x + transform.up * -z);
+                moving = (transform.right * x + transform.forward * z);
+                break;
+        }
+    }
+    public void PlayerMoving()
+    {
+        PlayerMovingInput();
+        PlayerMovingDirection();
         switch ((isLaddered, Activators.isGrounded))
         {
             case (true, true):
-                controller.Move(gamevelocity * Time.deltaTime * moving);
+                controller.Move(gamevelocity * moving);
                 break;
             case (true, false):
-                controller.Move(gamevelocity * Time.deltaTime * laddermoving);
+                controller.Move((gamevelocity/2) * laddermoving);
                 break;
             case (false, true):
-                controller.Move(gamevelocity * Time.deltaTime * moving);
+                controller.Move(gamevelocity * moving);
                 break;
             case (false, false):
-                controller.Move(gamevelocity * Time.deltaTime * moving);
+                controller.Move(gamevelocity * moving);
                 break;
         }
 
-        velocity.y += gravity * Time.deltaTime;
+        velocity = (gravity * Time.deltaTime)* gravityDirection + velocity;
         controller.Move(velocity * Time.deltaTime);
+
 
         if (Input.GetAxis("Horizontal") != 0 & Input.GetAxis("Vertical") != 0)
         {
@@ -217,6 +283,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         Vector3 moving = (transform.right * x + transform.forward * z + transform.up * y);
-        controller.Move(gamevelocity * Time.deltaTime * moving);
+        controller.Move(gamevelocity * moving);
     }
 }
