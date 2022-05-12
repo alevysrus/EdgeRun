@@ -28,10 +28,10 @@ public class MenuBehaviour : MonoBehaviour
     private bool isSubMenuActive;
     private void Start()
     {
+        Time.timeScale = 1f;
         Disabled.interactable = false;
         
         isSubMenuActive = false;
-        Time.timeScale = Activators.timeLine;
         if (PlayerPrefs.HasKey("volume"))
         {
             Activators.volume = PlayerPrefs.GetFloat("volume");
@@ -66,7 +66,7 @@ public class MenuBehaviour : MonoBehaviour
             ContinueButton.interactable = false;
         }
         VolumeText.text = ((int)(Activators.volume * 100)).ToString();
-        Sensitivitytext.text = ((int)(Activators.mouseSensitivity / 5)).ToString();
+        Sensitivitytext.text = ((int)(Activators.mouseSensitivity / 15)).ToString();
         FOVtext.text = Activators.defaultFOV.ToString();
         FOVslider.value = Activators.defaultFOV;
         Volume.value = Activators.volume;
@@ -81,7 +81,7 @@ public class MenuBehaviour : MonoBehaviour
             ContinueButton.interactable = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && isSubMenuActive)
+        if (Input.GetButtonDown("Cancel") && isSubMenuActive)
         {
 
             BackToMenu();
@@ -91,7 +91,7 @@ public class MenuBehaviour : MonoBehaviour
     public void SetSensitivity(float sensitivity)
     {
         Activators.mouseSensitivity = sensitivity;
-        Sensitivitytext.text = ((int)(Activators.mouseSensitivity / 5)).ToString();
+        Sensitivitytext.text = ((int)(Activators.mouseSensitivity / 15)).ToString();
     }
     public void SetFOV(float FOV)
     {

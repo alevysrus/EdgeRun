@@ -44,14 +44,16 @@ public class Pause : MonoBehaviour
         SettingsMenu.SetActive(false);
         FOVtext.text = Activators.defaultFOV.ToString();
         VolumeText.text = ((int)(Activators.volume * 100)).ToString();
-        Sensitivitytext.text = ((int)(Activators.mouseSensitivity / 5)).ToString();
+        Sensitivitytext.text = ((int)(Activators.mouseSensitivity / 15)).ToString();
         FOVslider.value = Activators.defaultFOV;
+        playercamera.fieldOfView = Activators.defaultFOV;
         Volume.value = Activators.volume;
         Sensslider.value = Activators.mouseSensitivity;
+ 
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !IsSettingActive)
+        if (Input.GetButtonDown("Cancel") && !IsSettingActive)
         {
             if (!IsActive)
             {
@@ -68,10 +70,10 @@ public class Pause : MonoBehaviour
                 IsActive = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-                Time.timeScale = Activators.timeLine;
+                Time.timeScale = 1f;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Escape) && IsSettingActive)
+        if (Input.GetButtonDown("Cancel") && IsSettingActive)
         {
             SettingsMenu.SetActive(false);
             IsSettingActive = false;
@@ -100,13 +102,13 @@ public class Pause : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = Activators.timeLine;
+        Time.timeScale = 1f;
         Activators.gravityIndex = 0;
     }
     public void SetSensitivity(float sensitivity)
     {
         Activators.mouseSensitivity = sensitivity;
-        Sensitivitytext.text = ((int)(Activators.mouseSensitivity / 5)).ToString();
+        Sensitivitytext.text = ((int)(Activators.mouseSensitivity / 15)).ToString();
     }
     public void SetFOV(float FOV)
     {
@@ -132,7 +134,7 @@ public class Pause : MonoBehaviour
         IsActive = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        Time.timeScale = Activators.timeLine;
+        Time.timeScale = 1f;
     }
     public void Mainmenu()
     {

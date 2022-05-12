@@ -64432,6 +64432,10 @@ PrefabInstance:
       propertyPath: playercamera
       value: 
       objectReference: {fileID: 207729800}
+    - target: {fileID: 4466308559948758153, guid: 9e9e8256c5d40014ab9e7515fc9468a3, type: 3}
+      propertyPath: respawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 946478569}
     - target: {fileID: 4466308559948758155, guid: 9e9e8256c5d40014ab9e7515fc9468a3, type: 3}
       propertyPath: m_RootOrder
       value: 6

@@ -7,8 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public CustomController controller;
     float speed = 15f;
     float gamevelocity = 15f;
-    float gravity = -3100f;
-    float jumpHeihgt = 135f;
+    float gravity = -90f;
+    float jumpHeihgt = 3.5f;
     public LayerMask groundMask;
     public LayerMask ladderMask;
     public Transform groundCheck;
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         isGod = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (!isGod)
         {
@@ -219,8 +219,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
 
-        velocity = (gravity * Time.deltaTime)* gravityDirection + velocity;
-        controller.Move(velocity * Time.deltaTime);
+        velocity = gravity * Time.deltaTime * gravityDirection + velocity;
+        controller.Move(velocity);
 
 
         if (Input.GetAxis("Horizontal") != 0 & Input.GetAxis("Vertical") != 0)

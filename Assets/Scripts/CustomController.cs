@@ -5,8 +5,8 @@ using UnityEngine;
 public class CustomController : MonoBehaviour
 {
 
-	public new Rigidbody rigidbody;
-	public new CapsuleCollider collider;
+	[SerializeField]private new Rigidbody rigidbody;
+	[SerializeField] private new CapsuleCollider collider;
 	public LayerMask ignore;
 
 	private readonly Collider[] overlaps = new Collider[5];
@@ -18,12 +18,12 @@ public class CustomController : MonoBehaviour
     }
     public void Move(Vector3 motion)
 	{
-		GetState(motion);
-		ClearVariables();
-		HandleCollision();
-		HandleContacts();
-		Depenetrate();
-		SetState();
+			GetState(motion);
+			ClearVariables();
+			HandleCollision();
+			HandleContacts();
+			Depenetrate();
+			SetState();
 	}
 
 	private void GetState(Vector3 motion)

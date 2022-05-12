@@ -54,7 +54,7 @@ public class EtherealBehaviour : MonoBehaviour
     private void Update()
     {
         Activators.executionIndex++;
-        if (Input.GetKeyDown(KeyCode.E) && Activators.isGrounded)
+        if (Input.GetButtonDown("Ethereal") && Activators.isGrounded)
         {
             if (!Activators.isPlayerHasEtherealSphere)
             {
