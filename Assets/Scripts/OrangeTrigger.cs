@@ -18,15 +18,14 @@ public class OrangeTrigger : MonoBehaviour
             Activators.isOrangeDefault = true;
         }
     }
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (Activators.isOrangeDefault)
+        if (!Activators.isOrangeDefault)
         {
             for (int i = 0; i < Cubes.Length; i++)
             {
                 Cubes[i].transform.position = new Vector3(changed[i].x, changed[i].y, changed[i].z);
             }
-            Activators.isOrangeDefault = false;
         }
         else
         {
@@ -34,8 +33,17 @@ public class OrangeTrigger : MonoBehaviour
             {
                 Cubes[i].transform.position = new Vector3(_default[i].x, _default[i].y, _default[i].z);
             }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (Activators.isOrangeDefault)
+        {
+            Activators.isOrangeDefault = false;
+        }
+        else
+        {
             Activators.isOrangeDefault = true;
         }
-
     }
 }

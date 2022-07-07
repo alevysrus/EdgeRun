@@ -22,14 +22,11 @@ public class MenuBehaviour : MonoBehaviour
     public GameObject OnEnterSettings,OnEnterNewGame, OnExit;
     public Text Version;
 
-    public Button Disabled;
-
     public CameraAnimation moving;
     private bool isSubMenuActive;
     private void Start()
     {
         Time.timeScale = 1f;
-        Disabled.interactable = false;
         
         isSubMenuActive = false;
         if (PlayerPrefs.HasKey("volume"))

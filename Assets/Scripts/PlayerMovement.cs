@@ -67,8 +67,7 @@ public class PlayerMovement : MonoBehaviour
             Activators.playerDeathIndex = false;
         }
     }
-
-    public void PlayerMovingInput()
+    private void PlayerMovingInput()
     {
         laddercheckcondition = Physics.CheckSphere(ladderCheck.position, 0.5f, ladderMask);
         Activators.isGrounded = Physics.CheckSphere(groundCheck.position, 0.3f, groundMask);
@@ -95,7 +94,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
 
-        PlayerGravityDirection();
+        PlayerDirection();
+        gravityDirection = transform.up;
 
         if (Activators.isGrounded | isLaddered)
         {
@@ -145,64 +145,36 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-    public void PlayerGravityDirection()
+    private void PlayerDirection()
     {
         switch (Activators.gravityIndex)
         {
             case 0:
-                gravityDirection = transform.up;
+                controller.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 15f);
                 break;
             case 1:
-                gravityDirection = -transform.right;
+                controller.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 90), Time.deltaTime * 15f);
                 break;
             case 2:
-                gravityDirection = transform.forward;
+                controller.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), Time.deltaTime * 15f);
                 break;
             case 3:
-                gravityDirection = transform.right;
+                controller.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, -90), Time.deltaTime * 15f);
                 break;
             case 4:
-                gravityDirection = -transform.forward;
+                controller.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(-90, 0, 0), Time.deltaTime * 15f);
                 break;
             case 5:
-                gravityDirection = -transform.up;
+                controller.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(180, 180, 0), Time.deltaTime * 15f);
                 break;
         }
     }
-    public void PlayerMovingDirection()
-    {
-        switch (Activators.gravityIndex)
-        {
-            case 0:
-                laddermoving = (transform.right * x + transform.up * z);
-                moving = (transform.right * x + transform.forward * z);
-                break;
-            case 1:
-                laddermoving = (transform.up * x + transform.right * -z);
-                moving = (transform.up * x + transform.forward * z);
-                break;
-            case 2:
-                laddermoving = (transform.right * -x + transform.forward * z);
-                moving = (transform.right * -x + transform.up * -z);
-                break;
-            case 3:
-                laddermoving = (transform.up * -x + transform.right * z);
-                moving = (transform.up * -x + transform.forward * -z);
-                break;
-            case 4:
-                laddermoving = (transform.right * x + transform.forward * -z);
-                moving = (transform.right * x + transform.up * z);
-                break;
-            case 5:
-                laddermoving = (transform.right * -x + transform.up * -z);
-                moving = (transform.right * x + transform.forward * z);
-                break;
-        }
-    }
-    public void PlayerMoving()
+    private void PlayerMoving()
     {
         PlayerMovingInput();
-        PlayerMovingDirection();
+        laddermoving = (transform.right * x + transform.up * z);
+        moving = (transform.right * x + transform.forward * z);
+        
         switch ((isLaddered, Activators.isGrounded))
         {
             case (true, true):
@@ -232,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
             gamevelocity = speed;
         }
     }
-    public void GodMode()
+    private void GodMode()
     {
         x = Input.GetAxis("Horizontal");
         z = Input.GetAxis("Vertical");

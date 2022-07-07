@@ -10,6 +10,7 @@ public class Pause : MonoBehaviour
 {
     public Camera playercamera;
     public GameObject PauseMenu;
+    public GameObject EasyMenu;
     public GameObject SettingsMenu;
     private bool IsActive;
     private bool IsSettingActive;
@@ -21,15 +22,20 @@ public class Pause : MonoBehaviour
     public Text Sensitivitytext;
     public Slider FOVslider;
     public Slider Sensslider;
-    public GameObject OnEnterSettings, OnExitSettings;
+    public GameObject OnEnterSettings, OnExitSettingsToHard, OnExitSettingToEasy;
+    public GameObject GameUI;
+    private int GravityIndex;
+    public Image[] GravityArrows;
 
-    //public GameObject GameUI;
-    //public GameObject EtherealUI;
-    //public GameObject GravityUI;
     void Start()
     {
-        //GameUI.SetActive(false);
-
+        GravityIndex = 0;
+        if (//Activators.level < 5 
+            true)
+        { 
+            GameUI.SetActive(true);
+        }
+       
         if (Activators.isFullScreen)
         {
             ScreenSettings.isOn = true;
@@ -39,6 +45,7 @@ public class Pause : MonoBehaviour
             ScreenSettings.isOn = false;
         }
         PauseMenu.SetActive(false);
+        EasyMenu.SetActive(false);
         IsActive = false;
         IsSettingActive = false;
         SettingsMenu.SetActive(false);
@@ -53,20 +60,63 @@ public class Pause : MonoBehaviour
     }
     void Update()
     {
+        for (int i = 0; i < GravityArrows.Length; i++)
+        {
+            if (GravityIndex == i)
+            {
+                GravityArrows[i].color = new Color(216f, 219f, 255f, 1f);
+            }
+            else
+            {
+                GravityArrows[i].color = new Color(216f, 219f, 255f, 0.5f);
+            }
+        }
+        if (Activators.isEasy == 0)
+        {
+            PauseChanger(EasyMenu, OnExitSettingToEasy);
+        }
+        else
+        {
+            PauseChanger(PauseMenu, OnExitSettingsToHard);
+        }
+        if (//Activators.level > 4 && 
+            Input.GetButtonDown("Change") )
+        {
+            GravityChanger();
+        }
+        if (//Activators.level > 4 && 
+            Input.GetButtonDown("Apply"))
+        {
+            GravityApply();
+        }
+    }
+    
+    private void GravityApply()
+    {
+        Activators.gravityIndex++;
+        Activators.gravityIndex %= 6;
+    }
+    private void GravityChanger()
+    {
+        GravityIndex++;
+        GravityIndex %= 5;
+    }
+    private void PauseChanger(GameObject type, GameObject selected)
+    {
         if (Input.GetButtonDown("Cancel") && !IsSettingActive)
         {
             if (!IsActive)
             {
                 Time.timeScale = 0f;
-                PauseMenu.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(OnExitSettings);
+                type.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(selected);
                 IsActive = true;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
             else
             {
-                PauseMenu.SetActive(false);
+                type.SetActive(false);
                 IsActive = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -90,13 +140,20 @@ public class Pause : MonoBehaviour
             }
             PlayerPrefs.SetInt("FullScreen", Activators.forscreen);
             PlayerPrefs.Save();
-            PauseMenu.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(OnExitSettings);
+            type.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(selected);
         }
-        if (Input.GetKeyDown(KeyCode.Q) && Activators.level > 4)
+    }
+    public void Load(GameObject type)
+    {
+        if (Activators.IsSaved > 0)
         {
-            Activators.gravityIndex++;
-            Activators.gravityIndex = Activators.gravityIndex % 6;
+            type.SetActive(false);
+            IsActive = false;
+            Activators.IsLoaded = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Time.timeScale = 1f;
         }
     }
     public void RestartLevel()
@@ -131,6 +188,7 @@ public class Pause : MonoBehaviour
     public void Resume()
     {
         PauseMenu.SetActive(false);
+        EasyMenu.SetActive(false);
         IsActive = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -143,6 +201,7 @@ public class Pause : MonoBehaviour
     public void Settings()
     {
         PauseMenu.SetActive(false);
+        EasyMenu.SetActive(false);
         SettingsMenu.SetActive(true);
         IsSettingActive = true;
         EventSystem.current.SetSelectedGameObject(OnEnterSettings);
@@ -164,7 +223,17 @@ public class Pause : MonoBehaviour
         }
         PlayerPrefs.SetInt("FullScreen", Activators.forscreen);
         PlayerPrefs.Save();
-        PauseMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(OnExitSettings);
+
+        if (Activators.isEasy == 0)
+        {
+            EasyMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(OnExitSettingToEasy);
+        }
+        else
+        {
+            PauseMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(OnExitSettingsToHard);
+        }
+        
     }
 }

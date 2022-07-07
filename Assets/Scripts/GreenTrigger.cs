@@ -18,15 +18,14 @@ public class GreenTrigger : MonoBehaviour
             Activators.isGreenDefault = true;
         }
     }
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (Activators.isGreenDefault)
+        if (!Activators.isGreenDefault)
         {
             for (int i = 0; i < Cubes.Length; i++)
             {
                 Cubes[i].transform.position = new Vector3(changed[i].x, changed[i].y, changed[i].z);
             }
-            Activators.isGreenDefault = false;
         }
         else
         {
@@ -34,8 +33,17 @@ public class GreenTrigger : MonoBehaviour
             {
                 Cubes[i].transform.position = new Vector3(_default[i].x, _default[i].y, _default[i].z);
             }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (Activators.isGreenDefault)
+        {
+            Activators.isGreenDefault = false;
+        }
+        else
+        {
             Activators.isGreenDefault = true;
         }
-
     }
 }

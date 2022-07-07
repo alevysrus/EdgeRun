@@ -18,15 +18,14 @@ public class BlueTrigger : MonoBehaviour
             Activators.isBlueDefault = true;
         }
     }
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (Activators.isBlueDefault)
+        if (!Activators.isBlueDefault)
         {
             for (int i = 0; i < Cubes.Length; i++)
             {
                 Cubes[i].transform.position = new Vector3(changed[i].x, changed[i].y, changed[i].z);
             }
-            Activators.isBlueDefault = false;
         }
         else
         {
@@ -34,6 +33,16 @@ public class BlueTrigger : MonoBehaviour
             {
                 Cubes[i].transform.position = new Vector3(_default[i].x, _default[i].y, _default[i].z);
             }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (Activators.isBlueDefault)
+        {
+            Activators.isBlueDefault = false;
+        }
+        else
+        {
             Activators.isBlueDefault = true;
         }
         

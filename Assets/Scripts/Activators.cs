@@ -8,7 +8,7 @@ public class Activators
     public static bool isFullScreen = true;
     public static int forscreen;
     public static float defaultFOV = 80f;
-    public static float mouseSensitivity = 100f;
+    public static float mouseSensitivity = 300f;
     public static int isEasy;
 
     public static bool isBlueDefault = true;
@@ -24,9 +24,10 @@ public class Activators
     public static int gravityIndex = 0;
 
     public static bool playerDeathIndex;
-    public static bool cameraDeathIndex;
     public static bool etherealDeathIndex;
     public static int CountOfRespawn = 0;
+    public static int IsSaved;
+    public static bool IsLoaded;
 
 
 }
